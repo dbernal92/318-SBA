@@ -5,7 +5,9 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-    res.json(posts)
+        const { userId } = req.query;
+        const filteredPosts = userId ? posts.filter(post => post.userId == userId) : posts;
+        res.json(filteredPosts);
 })
     .post((req, res) => {
         if(req.body.userId && req.body.title && req.body.content){
