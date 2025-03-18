@@ -8,6 +8,8 @@ const comments = require("./routes/comments")
 const app = express()
 const PORT = 3000
 
+app.set("view engine", "ejs")
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json({extended: true}))
 
