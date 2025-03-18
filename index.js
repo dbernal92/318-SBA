@@ -36,3 +36,8 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
 
+// Catch and return errors as JSON to prevent crash
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status((500).json({ error: "Sorry, there was an error."}))
+})
