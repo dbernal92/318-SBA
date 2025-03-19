@@ -45,6 +45,10 @@ app.get('/', (req, res) => {
     res.send("Base home page")
 })
 
+app.get('/posts/view', (req, res) => {
+    res.render("index", { posts })
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
