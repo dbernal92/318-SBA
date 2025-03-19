@@ -1,4 +1,4 @@
-require('.dotenv').config();
+require('dotenv').config();
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -12,7 +12,7 @@ const PORT = 3000
 
 function checkAuth(req, res, next) {
     const token = req.headers.authorization;
-    if (!toke || token !== process.env.AUTH_TOKEN) {
+    if (!token || token !== process.env.AUTH_TOKEN) {
         return res.status(403).json({ error: "Access denied: Invalid/missing token."})
     }
 }
@@ -56,5 +56,5 @@ app.listen(PORT, () => {
 // Catch and return errors as JSON to prevent crash
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status((500).json({ error: "Sorry, there was an error."}))
+    res.status(500).json({ error: "Sorry, there was an error."})
 })
