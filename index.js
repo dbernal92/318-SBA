@@ -1,3 +1,5 @@
+require('.dotenv').config();
+
 const express = require('express')
 const bodyParser = require('body-parser')
 
@@ -7,6 +9,15 @@ const comments = require("./routes/comments")
 
 const app = express()
 const PORT = 3000
+
+function checkAuth(req, res, next) {
+    const token = req.headers.authorization;
+    if (!toke || token !== process.env.AUTH_TOKEN) {
+        return res.status(403).json({ error: "Access denied: Invalid/missing token."})
+    }
+}
+
+app.use("/protected", checkAuth)
 
 app.set("view engine", "ejs")
 
@@ -19,8 +30,6 @@ app.use((req, res, next) => {
     console.log(`request type: ${req.method} sent to: ${req.url}`);
     next()
 })
-
-
 
 app.use("/users", users)
 app.use("/posts", posts)
